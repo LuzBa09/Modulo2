@@ -4,8 +4,9 @@
 
 
 peso_kg=float(input("Ingrese su peso en kg: "))
-altura_cm=float(input("Ingrese su altura en cm: "))
+altura_m=float(input("Ingrese su altura en m: "))
 edad=int(input("Ingrese su edad: "))
+imc = peso_kg / ((altura_m) ** 2)
 
 def calcular_imc(peso_kg, altura_m):
   """Calcula el Índice de Masa Corporal (IMC).
@@ -19,10 +20,10 @@ def calcular_imc(peso_kg, altura_m):
 	    float: El IMC calculado
 	    """
   imc = peso_kg / (altura_m ** 2)
-  print(f"Tiene sobrepeso({imc:.2f}): return {imc >= 25}" )
-  return imc >= 25
+  print(f"Tiene sobrepeso imc({imc:.2f}): return {imc >= 25}" )
+  return imc
 
-calcular_imc(peso_kg, altura_cm/100)
+calcular_imc(peso_kg, altura_m)
 	 
 def es_peso_saludable(imc):
 	"""
@@ -35,11 +36,12 @@ def es_peso_saludable(imc):
 	    bool: True si está en rango saludable, False si no
 	    """
 	    # Operadores de comparación y lógicos
-	print(f"Tiene bajo peso({imc:.2f}): return {18.5 <= imc <= 24.9}" )
-	return 18.5 <= imc <= 24.9
+	print(f"Tiene peso saludable({imc:.2f}): return {18.5 <= imc < 25}" )
 
-es_peso_saludable(calcular_imc(peso_kg, altura_cm/100))
+
+es_peso_saludable(imc)
 	 
+
 def tiene_sobrepeso(imc):
 	"""
 	    Determina si hay sobrepeso (IMC >= 25).
@@ -47,18 +49,20 @@ def tiene_sobrepeso(imc):
 	    # TU CÓDIGO AQUÍ
 	print(f"Tiene sobrepeso({imc:.2f}): return {imc >= 25}" )
 	return imc >= 25
-	 
+
+tiene_sobrepeso(imc)
 	 
 def tiene_bajo_peso(imc):
+
 	"""
 	    Determina si hay bajo peso (IMC < 18.5).
 	    """
 	    # TU CÓDIGO AQUÍ
 	print(f"Tiene bajo peso({imc:.2f}): return {imc < 18.5}" )
 	return imc < 18.5
+tiene_bajo_peso(imc)
 	 
-	 
-def calcular_calorias_diarias(peso_kg, altura_cm, edad, es_hombre):
+def calcular_calorias_diarias(peso_kg, altura_m, edad, es_hombre):
 	"""
 	    Calcula las calorías diarias recomendadas usando Fórmula de Harris-Benedict.
 	    
@@ -77,13 +81,14 @@ def calcular_calorias_diarias(peso_kg, altura_cm, edad, es_hombre):
 	 
 	    # Usa el hecho de que True=1 y False=0
 	    # TU CÓDIGO AQUÍ
-	calorias_hombre = 88.362 + (13.397 * peso_kg) + (4.799 * altura_cm) - (5.677 * edad)
-	calorias_mujer = 447.593 + (9.247 * peso_kg) + (3.098 * altura_cm) - (4.330 * edad)
+	calorias_hombre = 88.362 + (13.397 * peso_kg) + (4.799 * altura_m) - (5.677 * edad)
+	calorias_mujer = 447.593 + (9.247 * peso_kg) + (3.098 * altura_m) - (4.330 * edad)
 	print(f"Calorías para hombre: {calorias_hombre:.2f}, Calorías para mujer: {calorias_mujer:.2f}")
 	return es_hombre * calorias_hombre + (not es_hombre) * calorias_mujer
         #usa el hecho de que true1 y false 0
         #return es_hombre * calorias_hombre + (1 es_hombre) * calorias_mujer
-	 
+calcular_calorias_diarias(peso_kg, altura_m, edad,es_hombre=True)
+
 def calcular_agua_diaria(peso_kg):
 	"""
 	    Calcula litros de agua recomendados al día (35ml por kg de peso).
@@ -92,6 +97,7 @@ def calcular_agua_diaria(peso_kg):
 	agua_litros = (peso_kg * 35) / 1000
 	print(f"Calcular agua diaria:( {peso_kg}) return {agua_litros:.2f} litros" )
 	return agua_litros
+calcular_agua_diaria(peso_kg)
 	 
 def calcular_ritmo_cardiaco_maximo(edad):
 	"""
@@ -101,4 +107,4 @@ def calcular_ritmo_cardiaco_maximo(edad):
 	ritmo_cardiaco_max = 220 - edad
 	print(f"Calcular ritmo cardíaco máximo:( {edad}) return {ritmo_cardiaco_max} bpm" )
 	return ritmo_cardiaco_max
-
+calcular_ritmo_cardiaco_maximo(edad)
